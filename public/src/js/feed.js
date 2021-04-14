@@ -144,3 +144,29 @@ function sendData() {
       updateUI();
     })
 }
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  if(titleInput.value.trim() === '' || locationInput.value.trim() === '') {
+    alert('Please enter something');
+    return;
+  }
+
+  if('serviceWorker' in navigator && 'SyncManager' in window) {
+    navigator.serviceWorker.ready
+    .then((sw) => {
+      var post = {
+        id: new Date().toISOString(),
+        title: titleInput.value,
+        location: locationInput.value,
+      };
+      writeData('sync-posts', post)
+      .then(() => {
+        return sw.sync.register('sync-new-posts');
+      })
+    })
+  } else {
+    sendData();
+  }
+})

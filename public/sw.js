@@ -180,3 +180,11 @@ self.addEventListener('fetch', function (event) {
 //     fetch(event.request)
 //   );
 // });
+
+self.addEventListener('sync', (event) => {
+  console.log('[Service Worker] Background syncing', event);
+  //determine event tag
+  //read data indexedDB
+  //request 
+  
+})
