@@ -124,3 +124,23 @@ if ('indexedDB' in window) {
       }
     });
 }
+
+function sendData() {
+  fetch('https://pwagram-295a8-default-rtdb.firebaseio.com/posts.json', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify({
+      id: new Date().toISOString(),
+      title: titleInput.value,
+      location: locationInput.value,
+      image: 'https://firebasestorage.googleapis.com/v0/b/pwagram-295a8.appspot.com/o/amongus.png?alt=media&token=aa4a5940-717a-4c2c-8904-7b835827b8c8'
+    })
+  })
+    .then(function(res) {
+      console.log('Sent data', res);
+      updateUI();
+    })
+}
